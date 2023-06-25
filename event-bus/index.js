@@ -17,6 +17,12 @@ app.post("/events", async (req, res) => {
   await axios.post("http://localhost:4002/events", event).catch((err) => {
     console.log(err.message);
   });
+  if(event?.type === CommentCreated)
+  {
+    await axios.post("http://localhost:4003/events",event).catch(err=>{
+      console.log(err.message);
+    })
+  }
 
   res.send({ status: "ok" });
 });
